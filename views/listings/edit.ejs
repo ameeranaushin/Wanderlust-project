@@ -1,0 +1,61 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="mb-4">Edit Listing</h3>
+          
+          <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label class="form-label">Title</label>
+              <input name="listing[title]" type="text" value="<%= listing.title %>" required class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea name="listing[description]" required class="form-control"><%= listing.description %></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Image URL</label>
+              <input name="listing[image][url]" type="text" value="<%= listing.image.url %>" required class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input name="listing[price]" type="number" value="<%= listing.price %>" required class="form-control">
+            </div>
+
+            <div class="row">
+              <div class="mb-3 col-4">
+                <label class="form-label">Location</label>
+                <input name="listing[location]" type="text" value="<%= listing.location %>" required class="form-control">
+              </div>
+
+              <div class="mb-3 col-8">
+                <label class="form-label">Country</label>
+                <input name="listing[country]" type="text" value="<%= listing.country %>" required class="form-control">
+              </div>
+            </div>
+
+            <!-- Buttons wrapped in a flex container with gap -->
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-dark">Update Listing</button>
+              <a href="/listings/<%= listing._id %>" class="btn btn-secondary">Cancel</a>
+              <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" class="m-0">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Page footer outside card -->
+      
+      
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,130 @@
+.navbar{
+    height: 5rem;
+}
+.fa-compass {
+    font-size: 2 rem;
+    color: #fe424d;
+}
+.nav-link{
+    color: #222 !important;
+
+}
+
+body {
+  padding-top: 70px; /* match your navbar height */
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.f-info-links a {
+text-decoration: none;
+color: #222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #fe424d;
+}
+
+.listing-card {
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+  border-radius: 1rem !important;
+  object-fit: cover !important;
+  height:20rem !important;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.card-text p {
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+/* Fix image height and cropping */
+.card-img-fixed {
+  height: 200px;          /* Set desired height */
+  object-fit: cover;       /* Crop image without stretching */
+  transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.listing-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.listing-card:hover {
+  transform: translateY(-5px); /* Slight lift */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow */
+}
+
+.listing-card:hover .card-img-fixed {
+  transform: scale(1.05); /* Slight zoom on image */
+}
+
+.plus-jakarta-sans-200 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+}
+
+.plus-jakarta-sans-400 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+.plus-jakarta-sans-600 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+}
+
+.plus-jakarta-sans-800 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+}
+.card-text a {
+  color: black;        /* makes the link black */
+  text-decoration: none; /* ensures no underline */
+}
+
+.card-text a:hover {
+  color: #333;         /* optional hover color */
+}
+
+/* Add this to your CSS */
+.card.edit-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; /* Adjust based on your form content */
+}
+
+.card.edit-card .card-body {
+  flex: 1; /* Makes the form take available space */
+}
+
+.card.edit-card .card-footer {
+  margin-top: auto; /* Pushes footer/buttons to the bottom */
+}
+
+  
+
+
+/* New page styles */
+.add-btn {
+    background-color: #fe424d;
+    border: none;
+}
+    .show-img {
+    height: 20rem !important;
+    object-fit: cover !important;
+}

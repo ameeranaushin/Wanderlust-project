@@ -1,0 +1,19 @@
+<h3 class="plus-jakarta-sans-600">All listings</h3>
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 g-4">
+  <% for (let listing of listings) { %>
+    <div class="col">
+      <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+        <div class="card listing-card">
+          <img src="<%= listing.image.url %>" class="card-img-top card-img-fixed" alt="listing_img" style="height:20rem">
+          <div class="card-body">
+            <p class="card-text plus-jakarta-sans-400">
+              <strong><%= listing.title %></strong><br>
+              ₹ <%= new Intl.NumberFormat("en-IN").format(listing.price) %> / night
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+
