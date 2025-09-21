@@ -7,14 +7,16 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const expressLayouts = require("express-ejs-layouts");
 
-const listingRouter = require("./routes/listing.js"); // Router
-const reviewRouter = require("./routes/review.js"); // Reviews router
-const userRouter = require("./routes/user.js"); // Users router
+const listingRouter = require("./routes/listing.js"); 
+const reviewRouter = require("./routes/review.js"); 
+const userRouter = require("./routes/user.js"); 
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+
+const ExpressError = require("./utils/ExpressError.js"); // Make sure you have this utility
 
 const app = express();
 
@@ -32,25 +34,26 @@ app.use(methodOverride("_method"));
 app.use(express.static(join(__dirname, "public")));
 
 // MongoDB
-const MONGO_URL = process.env.DB_URL || "mongodb://localhost:27017/wanderlust"; // Use env variable
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/wanderlust";
 connect(MONGO_URL)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch(err => console.error("❌ Error connecting to MongoDB", err));
 
-// Session
+// Sessions
 const sessionOptions = {
-  secret: process.env.SECRET || "mysecret", // Use env variable
+  secret: process.env.SESSION_SECRET || "mysecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 24 * 60 * 60 * 1000,
-    httpOnly: true
+    httpOnly: true 
   }
 };
 app.use(session(sessionOptions));
 app.use(flash());
 
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -58,6 +61,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Flash + currentUser middleware
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -68,7 +72,8 @@ app.use((req, res, next) => {
 // Routes
 app.use("/listings", listingRouter); 
 app.use("/listings/:listingId/reviews", reviewRouter); 
-app.use("/", userRouter); 
+app.use("/", userRouter);
+
 app.get("/", (req, res) => {
   res.send("hi am rest");
 });
@@ -85,8 +90,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { statusCode, message: err.message });
 });
 
-// Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Server for Render (use process.env.PORT)
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`🚀 Server running on port ${port}`);
 });
