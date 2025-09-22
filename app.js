@@ -75,7 +75,7 @@ app.use("/listings/:listingId/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.get("/", (req, res) => {
-  res.send("hi am rest");
+   res.redirect("/listings");
 });
 
 // 404 Handler
