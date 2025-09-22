@@ -34,10 +34,11 @@ app.use(methodOverride("_method"));
 app.use(express.static(join(__dirname, "public")));
 
 // MongoDB
-const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/wanderlust";
+const MONGO_URL = process.env.MONGO_URL;
 connect(MONGO_URL)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch(err => console.error("❌ Error connecting to MongoDB", err));
+
 
 // Sessions
 const sessionOptions = {
