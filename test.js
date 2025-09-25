@@ -1,10 +1,29 @@
-const express = require("express");
-const app = express();
+require('dotenv').config();
+const mongoose = require('mongoose');
+const Listing = require('./models/listing'); // make sure path is correct
 
-app.get("/", (req, res) => {
-  res.send("hi am rest");
-});
+const MONGO_URL = process.env.MONGO_URL;
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+async function testDB() {
+  try {
+    await mongoose.connect(MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB Atlas");
+
+    const listings = await Listing.find({});
+    console.log(`Found ${listings.length} listings in DB`);
+    if (listings.length > 0) {
+      console.log("Sample listing:", listings[0]);
+    }
+
+    mongoose.connection.close();
+    console.log("Connection closed");
+  } catch (err) {
+    console.error("❌ DB connection failed:", err);
+  }
+}
+
+testDB();
+
